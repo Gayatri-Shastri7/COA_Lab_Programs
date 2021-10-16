@@ -1,0 +1,25 @@
+ASSUME CS:CODE, DS:DATA
+DATA SEGMENT
+COUNT DB 06H
+RES DB 07H DUP(00H)
+DATA ENDS
+
+CODE SEGMENT
+START: MOV AX,DATA
+       MOV DS,AX
+       XOR AX,AX
+       XOR CX,CX
+       LEA SI,RES
+       MOV CL, COUNT
+       MOV AL, 00H
+       MOV BL,01H
+    L1:ADD AL, BL
+       MOV [SI],AL
+       MOV AL, BL
+       MOV BL, [SI]
+       INC SI
+       LOOP L1
+       MOV AH, 4CH
+       INT 21H
+CODE ENDS
+END START

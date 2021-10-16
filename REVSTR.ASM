@@ -1,0 +1,28 @@
+ASSUME CS:CODE, DS:DATA
+DATA SEGMENT
+        STRING1 DB 'GNITSW'
+        STRING2 DB 'XXXXXX'
+        COUNT EQU 06H
+DATA ENDS
+CODE SEGMENT
+START:
+       MOV AX,DATA
+       MOV DS,AX
+       XOR AX,AX
+       XOR DX,DX
+       XOR CX,CX
+       MOV CL,COUNT
+       MOV DI,OFFSET STRING2
+       MOV SI,OFFSET STRING1+COUNT-1
+
+UP:    MOV AL,[SI]
+       MOV [DI],AL
+       DEC SI
+       INC DI
+       DEC CL
+       JNZ UP
+
+       MOV AH,4CH
+       INT 21H
+CODE ENDS
+END START

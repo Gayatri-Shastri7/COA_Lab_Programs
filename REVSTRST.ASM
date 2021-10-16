@@ -1,0 +1,5 @@
+ASSUME CS:CODE, DS:DATA
+DATA SEGMENT
+         STR1 DB 'GNITSW'
+      
+

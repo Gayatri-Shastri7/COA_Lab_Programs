@@ -1,0 +1,29 @@
+ASSUME CS:CODE, DS:DATA
+DATA SEGMENT
+        LIST DB 05H,03H,01H,04H
+        COUNT EQU 04H
+DATA ENDS
+CODE SEGMENT
+START:
+        MOV AX,DATA
+        MOV DS,AX
+        MOV DL,COUNT-1
+
+AGAIN0: MOV CL,DL
+        MOV SI,OFFSET LIST
+AGAIN1: MOV AL,[SI]
+        CMP AL,[SI+1]
+        JL DOWN
+        XCHG [SI+1],AL
+        XCHG [SI],AL
+DOWN:   INC SI
+        LOOP AGAIN1
+        DEC DL
+        JNZ AGAIN0
+
+        MOV AH,4CH
+        INT 21
+CODE ENDS
+END START
+
+
